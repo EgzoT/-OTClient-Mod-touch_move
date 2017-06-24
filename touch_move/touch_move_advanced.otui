@@ -1,0 +1,152 @@
+TouchMove < UICheckBox
+
+  margin-top: 2
+  font: verdana-11px-monochrome
+  phantom: false
+
+  size: 57 57
+
+  $!pressed:
+    image-clip: 0 0 200 200
+
+  $pressed:
+    image-clip: 0 200 200 200
+
+Background < TouchMove
+  image-source: /touch_move/img_touch_move/background
+
+ArrowUp < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_N
+
+ArrowDown < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_S
+
+ArrowRight < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_E
+
+ArrowLeft < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_W
+
+ArrowNW < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_NW
+
+ArrowNE < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_NE
+
+ArrowSW < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_SW
+
+ArrowSE < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_SE
+
+ArrowCenter < TouchMove
+  image-source: /touch_move/img_touch_move/Arrow_O
+
+MiniWindow
+  id: touchMoveWindow
+  !text: tr('Move')
+  height: 250
+  icon: /touch_move/img_touch_move/moving_keys_icon
+  @onClose: modules.touch_move.onMiniWindowClose()
+  &save: true
+
+  UIButton
+    id: changeButton
+    anchors.top: minimizeButton.top
+    anchors.right: minimizeButton.left
+    margin-right: 3
+    size: 14 14
+    image-source: /images/ui/miniwindow_buttons
+    image-clip: 70 0 14 14
+    @onMouseRelease: modules.touch_move.changeNormalToAdvanced()
+
+    $hover:
+      image-clip: 70 14 14 14
+
+    $pressed:
+      image-clip: 70 28 14 14
+
+  MiniWindowContents
+    Background
+      id: background
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+    ArrowUp
+      id: arrowup
+      anchors.top: parent.top
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('N')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowDown
+      id: arrowdown
+      anchors.top: arrowcenter.bottom
+      anchors.horizontalCenter: arrowcenter.horizontalCenter
+      margin-top: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('S')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowRight
+      id: arrowright
+      anchors.top: arrowup.bottom
+      anchors.left: arrowup.right
+      margin-top: 5
+      margin-left: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('E')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowLeft
+      id: arrowleft
+      anchors.top: arrowup.bottom
+      anchors.right: arrowup.left
+      margin-top: 5
+      margin-right: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('W')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowNW
+      id: arrownw
+      anchors.top: parent.top
+      anchors.right: arrowup.left
+      margin-top: 5
+      margin-right: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('NW')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowNE
+      id: arrowleft
+      anchors.top: parent.top
+      anchors.left: arrowup.right
+      margin-top: 5
+      margin-left: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('NE')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowCenter
+      id: arrowcenter
+      anchors.top: arrowup.bottom
+      anchors.horizontalCenter: arrowup.horizontalCenter
+      margin-top: 5
+      @onMouseRelease: modules.touch_move.turnPlayer()
+
+    ArrowSW
+      id: arrownw
+      anchors.top: arrowcenter.bottom
+      anchors.right: arrowup.left
+      margin-top: 5
+      margin-right: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('SW')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
+
+    ArrowSE
+      id: arrowleft
+      anchors.top: arrowcenter.bottom
+      anchors.left: arrowup.right
+      margin-top: 5
+      margin-left: 5
+      @onMousePress: modules.touch_move.AutoTouchMove('SE')
+      @onMouseRelease: modules.touch_move.AutoTouchMoveEnd()
